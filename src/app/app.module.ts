@@ -3,6 +3,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { CardCheckerComponent } from 'src/app/card-checker.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CardService } from './card.service';
 
 @NgModule({
   declarations: [
@@ -10,9 +12,10 @@ import { CardCheckerComponent } from 'src/app/card-checker.component';
     CardCheckerComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CardService],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -1,22 +1,39 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
 import { CardService } from 'src/app/card.service';
-import { Result } from './'
+
 @Component({
   selector: 'app-card-checker',
   template: `
-    <input #box (keyup.enter)="onEnter(box.value)">
-    <p>{{value}}</p>
-    <div>
-        <p>{{results}}</p>
-    </div>
+    <input #card
+      (keyup.enter)="onEnter(card.value)">
+
+    <ul><li>{{this.result[1]}}</li></ul>
+
+   
   `
 })
-export class CardCheckerComponent {
+export class CardCheckerComponent  {
+
+  constructor(private _cardService: CardService) { }
+
   value = '';
-  results = '';
-  onEnter(value: string) { this.value = value; }
-  getResult() : void {
-    this.results = this.CardService.getResult().subscribe(results => this.results = results);
-  }
+  result = '';
+
+   onEnter(value: string) {
+
+    this.value = value; 
   
+    console.log("Component");
+    console.log(this.value);
+
+    this._cardService.getResult(this.value).subscribe(
+      result => { this.result = result }
+    );
+    
+    return this.result;
+  
+  }
+
+//  getCCResult() { }
+
 }
